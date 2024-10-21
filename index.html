@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDo App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        #taskInput {
+            width: 70%;
+            padding: 10px;
+            margin-right: 5px;
+        }
+        button {
+            padding: 10px 15px;
+        }
+        .task {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0,0,0,0.2);
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .task-buttons {
+            display: flex;
+            gap: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ToDo App</h1>
+    <input type="text" id="taskInput" placeholder="Indtast opgave...">
+    <button id="addTaskButton">Tilføj Opgave</button>
+
+    <h2>Opgaver</h2>
+    <div id="todoList"></div>
+
+    <h2>Færdige Opgaver</h2>
+    <div id="completedList"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
