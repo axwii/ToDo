@@ -1,6 +1,8 @@
 // Controller
 document.addEventListener('DOMContentLoaded', () => {
+    // View elements
     const taskInput = document.getElementById('taskInput');
+    const quantityInput = document.getElementById('quantityInput');
     const addTaskButton = document.getElementById('addTaskButton');
     const todoList = document.getElementById('todoList');
     const completedList = document.getElementById('completedList');
@@ -10,16 +12,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // View
     function renderTasks() {
-        todoList.innerHTML = '';
-        completedList.innerHTML = '';
+        todoList.textContent = '';
+        completedList.textContent = '';
 
         tasks.forEach(task => {
             const taskDiv = document.createElement('div');
-            taskDiv.className = 'task';
-            taskDiv.setAttribute('data-id', task.id);
+            taskDiv.classList.add('task');
+            taskDiv.dataset.id = task.id;
 
+            // Vis opgavebeskrivelse, og kun kvantitet hvis den findes
             const taskDescription = document.createElement('span');
-            taskDescription.textContent = task.description;
+            taskDescription.textContent = task.quantity ? 
+                `${task.description} (Antal: ${task.quantity})` : 
+                `${task.description}`;
             if (task.completed) {
                 taskDescription.classList.add('completed');
             }
@@ -27,28 +32,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const taskButtons = document.createElement('div');
             taskButtons.className = 'task-buttons';
-
-            // Færdiggør opgave-knap
+            
+            const createButton = (text, onClickHandler) => {
+                const button = document.createElement('button');
+                button.textContent = text;
+                button.onclick = onClickHandler;
+                return button;
+            };
+            
+            // Opret opgaveknapper
             if (!task.completed) {
-                const completeButton = document.createElement('button');
-                completeButton.textContent = 'Færdig';
-                completeButton.onclick = () => completeTask(task.id);
+                const completeButton = createButton('Færdig', () => completeTask(task.id));
                 taskButtons.appendChild(completeButton);
             } else {
-                // Fortryd færdiggørelse-knap
-                const undoButton = document.createElement('button');
-                undoButton.textContent = 'Fortryd';
-                undoButton.onclick = () => undoTask(task.id);
+                const undoButton = createButton('Fortryd', () => undoTask(task.id));
                 taskButtons.appendChild(undoButton);
             }
-
-            // Slet opgave-knap
-            const deleteButton = document.createElement('button');
-            deleteButton.textContent = 'Slet';
-            deleteButton.onclick = () => deleteTask(task.id);
+            const deleteButton = createButton('Slet', () => deleteTask(task.id));
             taskButtons.appendChild(deleteButton);
 
             taskDiv.appendChild(taskButtons);
+
             // Vis opgaven i den rigtige liste
             if (task.completed) {
                 completedList.appendChild(taskDiv);
@@ -61,14 +65,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // Tilføj opgave-funktion
     function addTask() {
         const taskDescription = taskInput.value.trim();
+        const quantity = quantityInput.value.trim();
+
         if (taskDescription === '') {
             alert('Indtast en opgave.');
             return;
         }
 
         const newTask = {
-            id: Date.now(),
+            id: self.crypto.randomUUID(),
             description: taskDescription,
+            quantity: quantity || null, // Hvis kvantitet ikke er indtastet, gem null
             completed: false
         };
 
@@ -76,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tasks.push(newTask);
         localStorage.setItem('tasks', JSON.stringify(tasks));
         taskInput.value = '';
+        quantityInput.value = '';
         renderTasks(); // Opdater visningen
     }
 
