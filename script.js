@@ -30,9 +30,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             taskDiv.appendChild(taskDescription);
 
+            // Task-knapper: Færdiggør, Fortryd, Slet
             const taskButtons = document.createElement('div');
             taskButtons.className = 'task-buttons';
             
+            // Knapper genereres dynamisk baseret på task-status
             const createButton = (text, onClickHandler) => {
                 const button = document.createElement('button');
                 button.textContent = text;
@@ -62,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Tilføj opgave-funktion
+    // Tilføj opgave-funktion - Controller
     function addTask() {
         const taskDescription = taskInput.value.trim();
         const quantity = quantityInput.value.trim();
