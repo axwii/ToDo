@@ -16,17 +16,21 @@
             text-align: center;
             color: #ffffff; /* White headings */
         }
+        .input-container {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Space between elements */
+        }
         #taskInput, #quantityInput {
-            width: 70%;
+            flex-grow: 1; /* Allow inputs to grow */
             padding: 10px;
-            margin-right: 5px;
             background-color: #333; /* Darker input background */
             color: #e0e0e0; /* Light input text */
             border: none;
             border-radius: 5px;
         }
         #quantityInput {
-            width: 20%;
+            max-width: 100px;
         }
         button {
             padding: 10px 15px;
@@ -75,9 +79,11 @@
 </head>
 <body>
     <h1>ToDo App</h1>
-    <input type="text" id="taskInput" placeholder="Indtast opgave...">
-    <input type="number" id="quantityInput" placeholder="Antal..." min="1">
-    <button id="addTaskButton">Tilføj Opgave</button>
+    <div class="input-container">
+        <input type="text" id="taskInput" placeholder="Indtast opgave...">
+        <input type="number" id="quantityInput" placeholder="Antal..." min="1">
+        <button id="addTaskButton">Tilføj Opgave</button>
+    </div>
 
     <h2>Opgaver</h2>
     <div id="todoList"></div>
