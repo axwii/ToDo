@@ -35,22 +35,25 @@ document.addEventListener('DOMContentLoaded', () => {
             taskButtons.className = 'task-buttons';
             
             // Knapper genereres dynamisk baseret på task-status
-            const createButton = (text, onClickHandler) => {
+            const createButton = (text, onClickHandler, className) => {
                 const button = document.createElement('button');
                 button.textContent = text;
                 button.onclick = onClickHandler;
+                if (className) {
+                    button.classList.add(className);
+                }
                 return button;
             };
             
             // Opret opgaveknapper
             if (!task.completed) {
-                const completeButton = createButton('Færdig', () => completeTask(task.id));
+                const completeButton = createButton('Færdig', () => completeTask(task.id), 'complete-button');
                 taskButtons.appendChild(completeButton);
             } else {
-                const undoButton = createButton('Fortryd', () => undoTask(task.id));
+                const undoButton = createButton('Fortryd', () => undoTask(task.id), 'undo-button');
                 taskButtons.appendChild(undoButton);
             }
-            const deleteButton = createButton('Slet', () => deleteTask(task.id));
+            const deleteButton = createButton('Slet', () => deleteTask(task.id), 'delete-button');
             taskButtons.appendChild(deleteButton);
 
             taskDiv.appendChild(taskButtons);

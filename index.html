@@ -9,38 +9,67 @@
             font-family: Arial, sans-serif;
             margin: 20px;
             padding: 0;
-            background-color: #f4f4f4;
+            background-color: #1e1e1e; /* Dark background */
+            color: #e0e0e0; /* Light text color */
         }
-        h1 {
+        h1, h2 {
             text-align: center;
+            color: #ffffff; /* White headings */
         }
         #taskInput, #quantityInput {
             width: 70%;
             padding: 10px;
             margin-right: 5px;
+            background-color: #333; /* Darker input background */
+            color: #e0e0e0; /* Light input text */
+            border: none;
+            border-radius: 5px;
         }
         #quantityInput {
             width: 20%;
         }
         button {
             padding: 10px 15px;
+            background-color: #3f51b5; /* Bright blue buttons */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            filter: saturate(60%); /* Increase saturation on hover */
+            outline-offset: 2px;
+        }
+        .complete-button {
+            background-color: #009688;
+        }
+        .undo-button {
+            background-color: #ffc107;
+            color: black; /* Ensure text is readable on yellow background */
+        }
+        .delete-button {
+            background-color: #ff5722;
         }
         .task {
             display: flex;
             justify-content: space-between;
             padding: 10px;
             margin: 5px 0;
-            background: white;
+            background: #333; /* Darker task background */
+            color: #e0e0e0; /* Light task text */
             border-radius: 5px;
-            box-shadow: 0 0 5px rgba(0,0,0,0.2);
         }
         .completed {
             text-decoration: line-through;
-            color: gray;
+            color: #888; /* Dimmed color for completed tasks */
         }
         .task-buttons {
             display: flex;
             gap: 5px;
+        }
+        input::placeholder {
+            color: #888; /* Placeholder text color */
         }
     </style>
 </head>
